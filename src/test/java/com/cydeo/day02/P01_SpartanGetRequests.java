@@ -112,6 +112,7 @@ public class P01_SpartanGetRequests {
 
 
     }
+
     /*
         Given no headers provided
         When Users send GET request to /api/hello
@@ -125,9 +126,22 @@ public class P01_SpartanGetRequests {
     @Test
     public void helloSpartan() {
 
+        Response response = RestAssured.when().get(url + "/api/hello");
 
+        response.prettyPrint();
+        //Then response status code should be 200
+        Assertions.assertEquals(200, response.statusCode());
 
+        //And Content type header should be "text/plain;charset=UTF-8"
+        Assertions.assertEquals("text/plain;charset=UTF-8", response.contentType());
 
+        //And header should contain Date
+        Assertions.assertTrue(response.headers().hasHeaderWithName("Date"));
 
+        //And Content-Length should be 17
+        Assertions.assertEquals("17", response.header("Content-Length"));
+
+        //And body should be "Hello from Sparta"
+        Assertions.assertTrue(response.body().asString().contains("Hello from Sparta"));
     }
 }
