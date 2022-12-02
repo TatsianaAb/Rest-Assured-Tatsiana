@@ -64,6 +64,42 @@ public class P01_SpartanGetRequests {
 
         Assertions.assertTrue(date);
 
+    }
+
+
+    /*
+     * Given accept  content type is application/json
+     * When user sends GET request /api/spartans/3 endpoint
+     * Then status code should be 200
+     * And Content type should be application/json
+     * And response body needs to contains Fidole
+     */
+
+
+
+    @Test
+    public void getSpartan() {
+
+        Response response = RestAssured
+                .given()
+                    .accept(ContentType.JSON)
+                .when()
+                    .get(url + "/api/spartans/3");
+
+        //Verify status code
+        Assertions.assertEquals(200,response.statusCode());
+
+        //Verify contentType is application json
+        Assertions.assertEquals(ContentType.JSON.toString(),response.contentType());
+        Assertions.assertEquals("application/json",response.header("Content-Type"));
+        Assertions.assertEquals(ContentType.JSON.toString(),response.header("Content-Type"));
+        //ContentType.JSON.toString() --> it makes enum to String to able to use in assertions
+
+        //Verify body contains Fidole
+        Assertions.assertTrue(response.body().asString().contains("Fidole"));
+
+        // if we dont have related header or if we have typo it will return NULL
+        System.out.println("response.header(\"KeepAlive\") = " + response.header("KeepAlive"));
 
 
 
