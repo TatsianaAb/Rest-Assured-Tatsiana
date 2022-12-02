@@ -60,9 +60,9 @@ public class P01_SpartanGetRequests {
 
 
         //how can we verify date is exist ?
-        boolean isDateExist = response.headers().hasHeaderWithName("Date");
+        boolean date = response.headers().hasHeaderWithName("Date");
 
-        Assertions.assertTrue(isDateExist);
+        Assertions.assertTrue(date);
 
 
 
