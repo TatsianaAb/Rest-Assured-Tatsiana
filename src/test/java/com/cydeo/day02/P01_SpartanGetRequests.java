@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Locale;
 
 public class P01_SpartanGetRequests {
     String url = "http://3.80.111.193:8000";
