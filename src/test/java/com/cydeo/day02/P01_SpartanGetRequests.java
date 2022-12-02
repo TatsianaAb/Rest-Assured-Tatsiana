@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
@@ -18,15 +19,15 @@ public class P01_SpartanGetRequests {
      * Then status code should be 200
      * And Content type should be application/json
      */
-
+    @DisplayName("GET All Spartans")
     @Test
     public void getAllSpartans() {
 
-        Response response =RestAssured
+        Response response = RestAssured
                 .given()
-                    .accept(ContentType.JSON)
+                .accept(ContentType.JSON)
                 .when()
-                    .get(url + "/api/spartans");
+                .get(url + "/api/spartans");
 
         // print response
         // response.prettyPrint();
@@ -35,12 +36,12 @@ public class P01_SpartanGetRequests {
         // how to get status code
         int actualStatusCode = response.statusCode();
 
-        Assertions.assertEquals(200,actualStatusCode);
+        Assertions.assertEquals(200, actualStatusCode);
 
         //how can we get ContentType
         String actualContentType = response.contentType();
 
-        Assertions.assertEquals("application/json",actualContentType);
+        Assertions.assertEquals("application/json", actualContentType);
 
         //how to get header info
         String connection = response.header("Connection");
@@ -76,23 +77,23 @@ public class P01_SpartanGetRequests {
      */
 
 
-
+    @DisplayName("GET Single Spartan")
     @Test
     public void getSpartan() {
 
         Response response = RestAssured
                 .given()
-                    .accept(ContentType.JSON)
+                .accept(ContentType.JSON)
                 .when()
-                    .get(url + "/api/spartans/3");
+                .get(url + "/api/spartans/3");
 
         //Verify status code
-        Assertions.assertEquals(200,response.statusCode());
+        Assertions.assertEquals(200, response.statusCode());
 
         //Verify contentType is application json
-        Assertions.assertEquals(ContentType.JSON.toString(),response.contentType());
-        Assertions.assertEquals("application/json",response.header("Content-Type"));
-        Assertions.assertEquals(ContentType.JSON.toString(),response.header("Content-Type"));
+        Assertions.assertEquals(ContentType.JSON.toString(), response.contentType());
+        Assertions.assertEquals("application/json", response.header("Content-Type"));
+        Assertions.assertEquals(ContentType.JSON.toString(), response.header("Content-Type"));
         //ContentType.JSON.toString() --> it makes enum to String to able to use in assertions
 
         //Verify body contains Fidole
@@ -102,7 +103,9 @@ public class P01_SpartanGetRequests {
         System.out.println("response.header(\"KeepAlive\") = " + response.header("KeepAlive"));
 
 
-
-
     }
+
+
+
+
 }
