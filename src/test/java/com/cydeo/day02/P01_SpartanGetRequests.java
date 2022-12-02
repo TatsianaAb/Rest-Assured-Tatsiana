@@ -90,6 +90,9 @@ public class P01_SpartanGetRequests {
         //Verify status code
         Assertions.assertEquals(200, response.statusCode());
 
+
+        response.prettyPrint();
+
         //Verify contentType is application json
         Assertions.assertEquals(ContentType.JSON.toString(), response.contentType());
         Assertions.assertEquals("application/json", response.header("Content-Type"));
@@ -98,14 +101,33 @@ public class P01_SpartanGetRequests {
 
         //Verify body contains Fidole
         Assertions.assertTrue(response.body().asString().contains("Fidole"));
+        /*
+            it is not the good way to make assertion.In this we are just conversting response to String and with the help of String contains
+            we are just looking into Response.In real we need verfiy name is Fidole.Thats we need access name key to get value of it which Fidole
+
+         */
 
         // if we dont have related header or if we have typo it will return NULL
         System.out.println("response.header(\"KeepAlive\") = " + response.header("KeepAlive"));
 
 
     }
+    /*
+        Given no headers provided
+        When Users send GET request to /api/hello
+        Then response status code should be 200
+        And Content type header should be "text/plain;charset=UTF-8"
+        And header should contain Date
+        And Content-Length should be 17
+        And body should be "Hello from Sparta"
+    */
+    @DisplayName("GET Hello Sparta")
+    @Test
+    public void helloSpartan() {
 
 
 
 
+
+    }
 }
