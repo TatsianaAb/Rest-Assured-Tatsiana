@@ -29,7 +29,7 @@ public class P01_SpartanGetRequests {
                     .get(url + "/api/spartans");
 
         // print response
-        response.prettyPrint();
+        // response.prettyPrint();
 
 
         // how to get status code
@@ -41,6 +41,32 @@ public class P01_SpartanGetRequests {
         String actualContentType = response.contentType();
 
         Assertions.assertEquals("application/json",actualContentType);
+
+        //how to get header info
+        String connection = response.header("Connection");
+        System.out.println("connection = " + connection);
+
+
+        // get content type with header
+        System.out.println("response.header(\"Content-Type\") = " + response.header("Content-Type"));
+
+        // can we get connection() same as contentType() insteading of using header?
+        // A --> Rest Assured created couple of method for common usage.
+        // statusCode() contentType() methods are specificly created by them.So there is connection method
+
+
+        // get date header
+        System.out.println("response.header(\"Date\") = " + response.header("Date"));
+
+
+        //how can we verify date is exist ?
+        boolean isDateExist = response.headers().hasHeaderWithName("Date");
+
+        Assertions.assertTrue(isDateExist);
+
+
+
+
 
     }
 }
