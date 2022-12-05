@@ -49,6 +49,9 @@ public class P03_SpartanWithResponsePath extends SpartanTestBase {
         long phone = response.path("phone");
 
         System.out.println("id = " + id);
+        System.out.println("name = " + name);
+        System.out.println("gender = " + gender);
+        System.out.println("phone = " + phone);
 
         //if the path is incorrect it will return NULL
         String address = response.path("address");
