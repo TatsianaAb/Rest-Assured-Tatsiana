@@ -95,7 +95,6 @@ public class P03_SpartanWithResponsePath extends SpartanTestBase {
         // get me second spartan name from the last
         System.out.println("response.path(\"name[-2]\") = " + response.path("name[-2]"));
 
-
         // get me all spartans name
         List<String> allNames = response.path("name");
 
