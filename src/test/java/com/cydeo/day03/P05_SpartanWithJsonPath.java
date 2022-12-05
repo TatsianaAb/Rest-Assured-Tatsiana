@@ -43,7 +43,7 @@ public class P05_SpartanWithJsonPath extends SpartanTestBase {
         JsonPath jsonPath = response.jsonPath();
 
         // is it possible to get statusCode / ContentType / Headers with JsonPath
-        // if you wanna do assertion for then still we need to use response Object
+        // if you wanna do assertion for thenm still we need to use response Object
 
         System.out.println("jsonPath.getInt(\"id\") = " + jsonPath.getInt("id"));
 
@@ -54,6 +54,7 @@ public class P05_SpartanWithJsonPath extends SpartanTestBase {
 
         //Assertion
         assertEquals(10,id);
+
 
 
 
