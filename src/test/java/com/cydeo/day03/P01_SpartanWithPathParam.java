@@ -49,6 +49,35 @@ public class P01_SpartanWithPathParam extends SpartanTestBase {
     }
 
 
+      /*
+        TASK
+        Given accept type is Json
+        And Id parameter value is 500
+        When user sends GET request to /api/spartans/{id}
+        Then response status code should be 404
+        And response content-type: application/json
+        And "Not Found" message should be in response payload
+      */
+
+    @DisplayName("GET Spartan /api/spartans/{id} with invalid ID ")
+    @Test
+    public void test2() {
+
+        Response response = given().accept(ContentType.JSON)
+                .and() // Syntactic sugar --> to increase readability of code we can use in our code
+                .pathParam("id", 500).
+                when().get("/api/spartans/{id}");
+
+        //Then response status code should be 404
+        assertEquals(HttpStatus.SC_NOT_FOUND,response.statusCode());
+        assertEquals(404,response.statusCode());
+
+        //And response content-type: application/json
+        assertEquals("application/json",response.contentType());
+
+        //And "Not Found" message should be in response payload
+        assertTrue(response.body().asString().contains("Not Found"));
 
 
+    }
 }
