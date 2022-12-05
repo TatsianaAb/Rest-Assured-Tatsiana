@@ -139,6 +139,8 @@ public class P01_SpartanWithPathParam extends SpartanTestBase {
                         .queryParams(queryMap).
                 when().get("/api/spartans/search");
 
+        response.prettyPrint();
+
         //Then response status code should be 200
         assertEquals(200,response.statusCode());
         //And response content-type: application/json
