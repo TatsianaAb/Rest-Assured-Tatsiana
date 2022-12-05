@@ -7,6 +7,9 @@ import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -113,6 +116,33 @@ public class P01_SpartanWithPathParam extends SpartanTestBase {
         //And "Janette" should be in response payload
         assertTrue(response.body().asString().contains("Janette"));
 
+        /*
+         assertTrue(response.body().asString().contains("Female"));
+            We are just doing exercise to verify something in Response.This is not the proper to verify
+            all Spartans genders are Female.To do that we are gonna learn differetn method to get spesific data
+
+         */
+
+    }
+
+
+    @DisplayName("Get request /api/spartans/search with Query Params")
+    @Test
+    public void test4() {
+
+
+        Map<String,Object> queryMap=new HashMap<>();
+        queryMap.put("gender", "Female");
+        queryMap.put("nameContains", "e");
+
+        Response response = given().accept(ContentType.JSON)
+                        .queryParams(queryMap).
+                when().get("/api/spartans/search");
+
+        //Then response status code should be 200
+        assertEquals(200,response.statusCode());
+        //And response content-type: application/json
+        assertEquals("application/json",response.contentType());
 
     }
 
