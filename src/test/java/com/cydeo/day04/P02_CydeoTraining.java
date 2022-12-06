@@ -2,6 +2,7 @@ package com.cydeo.day04;
 
 import com.cydeo.utilities.CydeoTrainingTestBase;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,5 +62,24 @@ public class P02_CydeoTraining extends CydeoTrainingTestBase {
          street 777 5th Ave           ---> students[0].company.address.street
          zipCode 33222                ---> students[0].company.address.zipCode
          */
+
+        // Create JSON PATH OBJECT
+        JsonPath jsonPath = response.jsonPath();
+
+        assertEquals("Mark",jsonPath.getString("students[0].firstName"));
+
+        assertEquals(13,jsonPath.getInt("students[0].batch"));
+
+        assertEquals("math",jsonPath.getString("students[0].major"));
+
+        assertEquals("mark@email.com",jsonPath.getString("students[0].contact.emailAddress"));
+
+        assertEquals("Cydeo",jsonPath.getString("students[0].company.companyName"));
+
+        assertEquals("777 5th Ave",jsonPath.getString("students[0].company.address.street"));
+
+        assertEquals(33222,jsonPath.getInt("students[0].company.address.zipCode"));
+
+
     }
 }
