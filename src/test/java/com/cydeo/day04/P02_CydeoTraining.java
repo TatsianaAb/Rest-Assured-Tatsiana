@@ -82,4 +82,17 @@ public class P02_CydeoTraining extends CydeoTrainingTestBase {
 
 
     }
+
+      /*
+
+    TASK
+    Given accept type is application/json
+    And path param is 22
+    When user send request /student/batch/{batch}
+    Then status code should be 200
+    And content type is application/json;charset=UTF-8
+    And Date header is exist
+    And Server header is envoy
+    And verify all the batch number is 22
+     */
 }
