@@ -1,12 +1,15 @@
 package com.cydeo.day04;
 
+import com.cydeo.utilities.CydeoTrainingTestBase;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class P02_CydeoTraining {
+public class P02_CydeoTraining extends CydeoTrainingTestBase {
 
       /*
     Given accept type is application/json
@@ -32,7 +35,31 @@ public class P02_CydeoTraining {
     @Test
     public void test1() {
 
+        Response response = given().log().all().accept(ContentType.JSON)
+                .and()
+                .pathParam("id", 2).
+                when().get("/student/{id}");
+
+        response.prettyPrint();
 
 
+        assertEquals(200,response.statusCode());
+
+        assertEquals("application/json;charset=UTF-8",response.contentType());
+
+        assertTrue(response.headers().hasHeaderWithName("Date"));
+
+        assertEquals("envoy",response.header("server"));
+
+        /*
+
+         firstName Mark               ---> students[0].firstName
+         batch 13                     ---> students[0].batch
+         major math                   ---> students[0].major
+         emailAddress mark@email.com  ---> students[0].contact.emailAddress
+         companyName Cydeo            ---> students[0].company.companyName
+         street 777 5th Ave           ---> students[0].company.address.street
+         zipCode 33222                ---> students[0].company.address.zipCode
+         */
     }
 }
