@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 public class P01_HRWithJsonPath extends HrTestBase {
 
-    @DisplayName("Get All employees with Query Param limit = 200 --> JSONPATH ")
+    @DisplayName("Get All /employees?limit=200 --> JSONPATH ")
     @Test
     public void test1() {
 
