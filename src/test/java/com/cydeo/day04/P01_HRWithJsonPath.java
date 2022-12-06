@@ -58,8 +58,6 @@ public class P01_HRWithJsonPath extends HrTestBase {
         List<String> allEmployeesSalaryMoreThan10 = jsonPath.getList("items.findAll {it.salary>=10000}.first_name");
         System.out.println("allEmployeesSalaryMoreThan10 = " + allEmployeesSalaryMoreThan10);
 
-
-
         System.out.println("====================");
         // get me all information from response  who has max salary
         System.out.println("jsonPath.getString(\"items.max{it.salary}\") = " + jsonPath.getString("items.max{it.salary}"));
@@ -74,4 +72,21 @@ public class P01_HRWithJsonPath extends HrTestBase {
 
 
     }
+    /*
+
+    TASK
+    Given
+             accept type is application/json
+     When
+             user sends get request to /locaitons
+     Then
+             response status code must be 200
+             content type equals to application/json
+             get the second city with JsonPath
+             get the last city with JsonPath
+             get all country ids
+             get all city where their country id is UK
+
+      */
+
 }
