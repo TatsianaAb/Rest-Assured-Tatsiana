@@ -53,4 +53,35 @@ public class P01_HamCrestMatchersIntro {
         assertThat(5+5,lessThanOrEqualTo(10));
 
     }
+
+
+    @Test
+    public void testStrings() {
+        // so first will be actual result in this case right?
+        // Yes for now.but while we are implementing in then sections we are gonna send actual as we did in here
+        // it will read data from response under the hood
+
+
+        String msg="API is fun!";
+
+        assertThat(msg,is("API is fun!"));
+        assertThat(msg,equalTo("API is fun!"));
+        assertThat(msg,equalToIgnoringCase("api is fun!"));
+
+        assertThat(msg,startsWith("API"));
+        assertThat(msg,startsWithIgnoringCase("api"));
+
+        assertThat(msg,endsWith("fun!"));
+        assertThat(msg,endsWithIgnoringCase("FUN!"));
+
+        assertThat(msg,containsString("is"));
+        assertThat(msg,containsStringIgnoringCase("IS"));
+
+        assertThat(msg,not("Fun!"));
+        assertThat(msg,is(not("Fun!")));
+
+    }
+
+
+
 }
