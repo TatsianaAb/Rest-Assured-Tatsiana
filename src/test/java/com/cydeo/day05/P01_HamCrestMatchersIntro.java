@@ -104,12 +104,10 @@ public class P01_HamCrestMatchersIntro {
 
         assertThat(numberLst,hasItems(greaterThan(70)));
 
-
         //everyItem --> check each element into array about realted condition
         assertThat(numberLst,everyItem(greaterThanOrEqualTo(1)));
 
         assertThat(numberLst,containsInRelativeOrder(3, 5, 1, 77, 44, 76));
-
 
     }
 }
