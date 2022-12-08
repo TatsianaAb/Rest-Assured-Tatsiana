@@ -1,10 +1,11 @@
 package com.cydeo.day05;
 
 import com.cydeo.utilities.SpartanTestBase;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
+import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
@@ -23,9 +24,25 @@ public class P02_HamcrestSpartan extends SpartanTestBase {
         "gender": "Female",
         "phone": 1938695106
      */
+
+
     @DisplayName("Get Single Spartan with Hamcrest")
     @Test
     public void test1() {
+
+        given().accept(ContentType.JSON)
+                .and()
+                .pathParam("id",15).
+        when().get("/api/spartans/{id}").
+        then()
+                .statusCode(200)
+                // .statusCode(is(200)) --> if you wanna use with Matchers method you can use to increase readability
+                .contentType("application/json")
+                .body("id",is(15),
+                             "name",is("Meta"),
+                             "gender",is("Female"),
+                              "phone",is(1938695106));
+
 
 
     }
