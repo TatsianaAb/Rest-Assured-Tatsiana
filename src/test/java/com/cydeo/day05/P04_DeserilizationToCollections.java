@@ -46,6 +46,8 @@ public class P04_DeserilizationToCollections extends SpartanTestBase {
                 String name = (String) spartanMap.get("name");
                 String gender = (String) spartanMap.get("gender");
 
+                System.out.println("id = " + id);
+
         // Approach second ---> with JSONPATH
 
         JsonPath jsonPath = response.jsonPath();
@@ -55,6 +57,11 @@ public class P04_DeserilizationToCollections extends SpartanTestBase {
                 int idJson = (int) jsonPathMap.get("id");
                 String nameJson = (String) jsonPathMap.get("name");
 
+                System.out.println("idJson = " + idJson);
+
 
     }
+
+
+
 }
