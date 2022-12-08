@@ -2,6 +2,7 @@ package com.cydeo.day05;
 
 import com.cydeo.utilities.SpartanTestBase;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
@@ -40,6 +41,19 @@ public class P04_DeserilizationToCollections extends SpartanTestBase {
 
         Map<String,Object> spartanMap= response.as(Map.class);
         System.out.println("spartanMap = " + spartanMap);
+
+                int id = (int) spartanMap.get("id");
+                String name = (String) spartanMap.get("name");
+                String gender = (String) spartanMap.get("gender");
+
+        // Approach second ---> with JSONPATH
+
+        JsonPath jsonPath = response.jsonPath();
+        Map<String , Object> jsonPathMap = jsonPath.getMap("");
+        System.out.println("jsonPathMap = " + jsonPathMap);
+
+                int idJson = (int) jsonPathMap.get("id");
+                String nameJson = (String) jsonPathMap.get("name");
 
 
     }
