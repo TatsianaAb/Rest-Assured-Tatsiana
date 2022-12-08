@@ -83,6 +83,8 @@ public class P02_HamcrestSpartan extends SpartanTestBase {
                         "phone", is(1938695106))
                 .extract().response();
 
+        //but when you type path to end it is not showing an error regarding the type
+
         int id = response.path("id");
         System.out.println("id = " + id);
 
@@ -111,6 +113,29 @@ public class P02_HamcrestSpartan extends SpartanTestBase {
 
          */
 
+
+
+    }
+
+    @DisplayName("Get Single Spartan with Hamcrest")
+    @Test
+    public void test3() {
+
+        JsonPath jsonPath = given().accept(ContentType.JSON)
+                .pathParam("id", 15).
+                when().get("/api/spartans/{id}").prettyPeek().
+                then()
+                .statusCode(200)
+                // .statusCode(is(200)) --> if you wanna use with Matchers method you can use to increase readability
+                .contentType("application/json")
+                .body("id", is(15),
+                        "name", is("Meta"),
+                        "gender", is("Female"),
+                        "phone", is(1938695106))
+                .extract().response().jsonPath();
+
+        int id = jsonPath.getInt("id");
+        System.out.println("id = " + id);
 
 
     }
