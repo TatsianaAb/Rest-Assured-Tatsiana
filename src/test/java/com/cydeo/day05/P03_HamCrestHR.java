@@ -2,6 +2,7 @@ package com.cydeo.day05;
 
 import com.cydeo.utilities.HrTestBase;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -52,6 +53,59 @@ public class P03_HamCrestHR extends HrTestBase {
                     .body("items.email",containsInAnyOrder("DAUSTIN","AHUNOLD","BERNST","VPATABAL","DLORENTZ")) ;
 
 
+
+    }
+
+
+      /*
+      Given
+               accept type is application/json
+       When
+               user sends get request to /regions
+       Then
+               response status code must be 200
+               verify Date has values
+               first region name is Europe
+               first region id is 1
+               four regions we have
+               region names are not null
+               Regions name should be same order as "Europe","Americas","Asia","Middle East and Africa"
+               region ids needs to be 1,2,3,4
+
+               print all the regions names
+               ...
+               ..
+               .
+    */
+
+    @Test
+    public void test2() {
+
+
+        JsonPath jsonPath = given().accept(ContentType.JSON).
+                when().get("/regions").prettyPeek().
+                then()
+                .statusCode(200)
+                .header("Date", notNullValue())
+                .body("items[0].region_name", is("Europe"))
+                .body("items[0].region_id", is(1))
+                .body("items", hasSize(4))
+                .body("items.region_name", everyItem(notNullValue()))
+                .body("items.region_name", containsInRelativeOrder("Europe", "Americas", "Asia", "Middle East and Africa"))
+                .body("items.region_id", containsInRelativeOrder(1, 2, 3, 4))
+                .extract().jsonPath();
+
+
+        // print all the regions names
+        // Assume that we are gonna verify region names API vs Database
+
+        // Get all region Names from API response
+        List<String> allRegionNames = jsonPath.getList("items.region_name");
+        System.out.println("allRegionNames = " + allRegionNames);
+
+        // Get all region names from Database
+
+        // Compare
 
     }
 }
