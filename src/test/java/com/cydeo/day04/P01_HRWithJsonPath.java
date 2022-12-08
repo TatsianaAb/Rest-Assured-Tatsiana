@@ -28,9 +28,10 @@ public class P01_HRWithJsonPath extends HrTestBase {
     @Test
     public void test1() {
 
-        Response response = given().accept(ContentType.JSON)
-                .and() // it increases readablitity
-                .queryParam("limit", 200).
+        Response response =
+                given().accept(ContentType.JSON)
+                    .and() // it increases readablitity
+                    .queryParam("limit", 200).
                 when().get("/employees");
 
 
