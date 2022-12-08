@@ -34,16 +34,32 @@ public class P02_HamcrestSpartan extends SpartanTestBase {
                 .and()
                 .pathParam("id",15).
         when().get("/api/spartans/{id}").
-        then()
+        then().log().ifValidationFails()
+                .assertThat()
                 .statusCode(200)
+                .assertThat()
+                .and() // these are filler keywords / syntatic sugar to increase readability
                 // .statusCode(is(200)) --> if you wanna use with Matchers method you can use to increase readability
                 .contentType("application/json")
+                .assertThat() // these are again syntatic sugar just to increase readability
+                .and()
                 .body("id",is(15),
                              "name",is("Meta"),
                              "gender",is("Female"),
                               "phone",is(1938695106));
 
+        /*
+        REQUEST
+            given().log().all() --> it will give all inforamtion anout your request (path/query params , URI , body etc )
+                  .method()
+                  .uri()
+                  .parameters() ......
+        RESPONSE
 
+             then().log().all() --> it will give all response information
+                         .ifValidationFails() --> it will print all response if one of the validation fails
+
+         */
 
     }
 }
