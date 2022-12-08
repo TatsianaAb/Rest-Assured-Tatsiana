@@ -2,6 +2,8 @@ package com.cydeo.day05;
 
 import com.cydeo.utilities.SpartanTestBase;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -68,18 +70,21 @@ public class P02_HamcrestSpartan extends SpartanTestBase {
     @Test
     public void test2() {
 
-        given().accept(ContentType.JSON)
-                .pathParam("id",15).
-        when().get("/api/spartans/{id}").prettyPeek().
-        then()
+        Response response = given().accept(ContentType.JSON)
+                .pathParam("id", 15).
+                when().get("/api/spartans/{id}").prettyPeek().
+                then()
                 .statusCode(200)
                 // .statusCode(is(200)) --> if you wanna use with Matchers method you can use to increase readability
                 .contentType("application/json")
-                .body("id",is(15),
-                        "name",is("Meta"),
-                        "gender",is("Female"),
-                        "phone",is(1938695106));
+                .body("id", is(15),
+                        "name", is("Meta"),
+                        "gender", is("Female"),
+                        "phone", is(1938695106))
+                .extract().response();
 
+        int id = response.path("id");
+        System.out.println("id = " + id);
 
         // HOW TO PRINT RESPONSE BODY
         /*
@@ -89,6 +94,22 @@ public class P02_HamcrestSpartan extends SpartanTestBase {
 
          */
 
+
+        // HOW TO EXTRACT DATA AFTER DOING VALIDATION WITH HAMCREST ?
+        /*
+        - extract() --> method will help us to STORE data after doing verification as
+
+                response()
+                  OR
+                jsonPath()
+
+        - Why we need to extract ?
+            - Assume that we are gonna do verification against UI/DB.In that case I need to get data from API after doing verification
+            - SO we need to sometimes List of names / ids etc to check
+            - That is why we need to initilaize as Response or JSonPAth (Since we know how to get data through this objects )
+               to get realted data taht you wanna verfiy
+
+         */
 
 
 
