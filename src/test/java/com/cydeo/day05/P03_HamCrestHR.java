@@ -9,9 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.restassured.RestAssured.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
+
 public class P03_HamCrestHR extends HrTestBase {
     /*
                    Given accept type is Json
@@ -83,7 +82,7 @@ public class P03_HamCrestHR extends HrTestBase {
 
 
         JsonPath jsonPath = given().accept(ContentType.JSON).
-                when().get("/regions").prettyPeek().
+                when().get("/regions").
                 then()
                 .statusCode(200)
                 .header("Date", notNullValue())
