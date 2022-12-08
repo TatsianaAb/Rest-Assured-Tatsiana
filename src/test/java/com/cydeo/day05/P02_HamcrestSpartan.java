@@ -62,4 +62,35 @@ public class P02_HamcrestSpartan extends SpartanTestBase {
          */
 
     }
+
+
+    @DisplayName("Get Single Spartan with Hamcrest")
+    @Test
+    public void test2() {
+
+        given().accept(ContentType.JSON)
+                .pathParam("id",15).
+        when().get("/api/spartans/{id}").prettyPeek().
+        then()
+                .statusCode(200)
+                // .statusCode(is(200)) --> if you wanna use with Matchers method you can use to increase readability
+                .contentType("application/json")
+                .body("id",is(15),
+                        "name",is("Meta"),
+                        "gender",is("Female"),
+                        "phone",is(1938695106));
+
+
+        // HOW TO PRINT RESPONSE BODY
+        /*
+            - response.prettyPrint() (String) ---> it is printing response body into screen
+
+            - response.prettyPeek() (Response) ---> it will print response into screen, returns Response   and allows us to continue chaining
+
+         */
+
+
+
+
+    }
 }
