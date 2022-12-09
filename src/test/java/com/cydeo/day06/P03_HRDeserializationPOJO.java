@@ -42,6 +42,19 @@ public class P03_HRDeserializationPOJO extends HrTestBase {
 
     }
 
+    /*
+    TASK
 
+    Given accept is application/json
+    When send request  to /regions endpoint
+    Then status should be 200
+            verify that region ids are 1,2,3,4
+            verify that regions names Europe ,Americas , Asia, Middle East and Africa
+            verify that count is 4
+        -- Create Regions POJO
+        -- And ignore field that you dont need
+
+
+     */
 
 }
