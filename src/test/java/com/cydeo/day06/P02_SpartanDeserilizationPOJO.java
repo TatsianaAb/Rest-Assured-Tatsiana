@@ -1,5 +1,6 @@
 package com.cydeo.day06;
 
+import com.cydeo.pojo.Search;
 import com.cydeo.pojo.Spartan;
 import com.cydeo.utilities.SpartanTestBase;
 import io.restassured.http.ContentType;
@@ -78,5 +79,23 @@ public class P02_SpartanDeserilizationPOJO extends SpartanTestBase {
         System.out.println("spartan = " + spartan);
 
 
+    }
+    @DisplayName("GET Spartans from search endpoint for deserialization to Search Class ")
+    @Test
+    public void test3() {
+
+        Response response = given().accept(ContentType.JSON).
+                when().get("/api/spartans/search").
+                then()
+                .statusCode(200).extract().response();
+
+        System.out.println(" ----- JSON - GET FIRST SPARTAN-----");
+        JsonPath jp = response.jsonPath();
+
+        Search search = jp.getObject("", Search.class);
+
+        System.out.println(search.getTotalElement());
+        System.out.println("search.getContent().get(0) = " + search.getContent().get(0));
+        System.out.println("search.getContent().get(0).getName() = " + search.getContent().get(0).getName());
     }
 }
