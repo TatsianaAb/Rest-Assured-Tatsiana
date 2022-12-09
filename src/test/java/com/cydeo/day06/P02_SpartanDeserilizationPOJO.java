@@ -54,4 +54,29 @@ public class P02_SpartanDeserilizationPOJO extends SpartanTestBase {
 
 
     }
+
+    @DisplayName("GET Spartans from search endpoint for deserialization to POJO ")
+    @Test
+    public void test2() {
+
+        Response response = given().accept(ContentType.JSON).
+                when().get("/api/spartans/search").prettyPeek().
+                then()
+                .statusCode(200).extract().response();
+
+
+        // RESPONSE
+        System.out.println(" ----- RESPONSE - GET FIRST SPARTAN  -----");
+        // response.as() --> Since we can not put path in here to get specific part of Response
+        // we are no gonna do it
+
+        // JSONPATH
+        System.out.println(" ----- JSON - GET FIRST SPARTAN-----");
+        JsonPath jsonPath = response.jsonPath();
+
+        Spartan spartan = jsonPath.getObject("content[0]", Spartan.class);
+        System.out.println("spartan = " + spartan);
+
+
+    }
 }
