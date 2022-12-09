@@ -53,11 +53,20 @@ public class P01_HRDeserilization extends HrTestBase {
             System.out.println("eachLocations = " + eachLocations);
         }
 
-        System.out.println("====== FIRST LOCATION ======");
-        System.out.println("====== FIRST LOCATION ID ======");
-        System.out.println("====== FIRST LOCATION COUNTRY_ID ======");
-        System.out.println("====== GET FIRST LOCATION FIRST LINK  ====== ");
-        System.out.println("====== LAST LOCATION ID ======");
+        System.out.println("====== FIRST LOCATION  FROM ALL LOCATIONS ======");
+        System.out.println("allLocationsMap.get(0) = " + allLocationsMap.get(0));
+
+        System.out.println("====== FIRST LOCATION ID FROM ALL LOCATIONS======");
+        System.out.println("allLocationsMap.get(0).get(\"location_id\") = " + allLocationsMap.get(0).get("location_id"));
+
+
+        System.out.println("====== FIRST LOCATION COUNTRY_ID FROM ALL LOCATIONS======");
+        System.out.println("allLocationsMap.get(0).get(\"country_id\") = " + allLocationsMap.get(0).get("country_id"));
+
+
+        System.out.println("====== GET FIRST LOCATION FIRST LINK ALL LOCATIONS ====== ");
+
+        System.out.println("====== LAST LOCATION ID ALL LOCATIONS ======");
 
 
     }
