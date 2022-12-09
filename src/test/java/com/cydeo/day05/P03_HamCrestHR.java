@@ -3,10 +3,12 @@ package com.cydeo.day05;
 import com.cydeo.utilities.HrTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -94,7 +96,6 @@ public class P03_HamCrestHR extends HrTestBase {
                 .body("items.region_id", containsInRelativeOrder(1, 2, 3, 4))
                 .extract().jsonPath();
 
-
         // print all the regions names
         // Assume that we are gonna verify region names API vs Database
 
@@ -105,6 +106,30 @@ public class P03_HamCrestHR extends HrTestBase {
         // Get all region names from Database
 
         // Compare
+
+    }
+
+
+    @Test
+    public void test3() {
+
+
+        JsonPath jsonPath = given().accept(ContentType.JSON).
+                when().get("/regions").
+                then()
+                .statusCode(200)
+                .header("Date", notNullValue())
+                .body("items[0].region_name", is("Europe"))
+                .body("items[0].region_id", is(1))
+                .body("items", hasSize(4))
+                .body("items.region_name", everyItem(notNullValue()))
+                .body("items.region_name", containsInRelativeOrder("Europe", "Americas", "Asia", "Middle East and Africa"))
+                .body("items.region_id", containsInRelativeOrder(1, 2, 3, 4))
+                .extract().response().jsonPath();
+
+        List<Map<String,Object>> list = jsonPath.getList("items");
+        System.out.println("list = " + list);
+
 
     }
 }
