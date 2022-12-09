@@ -1,12 +1,9 @@
 package com.cydeo.pojo;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@ToString
+
+@Data
 public class Link {
 
     private String rel;
