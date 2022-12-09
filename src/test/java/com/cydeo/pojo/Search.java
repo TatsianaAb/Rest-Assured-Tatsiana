@@ -6,6 +6,9 @@ public class Search {
 
      private List<Spartan> content;
 
+     // Searach Class has relation with Spartan Class
+    // It is called as HAS-A RelationShip
+
      private  int totalElement;
 
 

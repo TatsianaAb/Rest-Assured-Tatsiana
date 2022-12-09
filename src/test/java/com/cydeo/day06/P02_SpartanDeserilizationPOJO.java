@@ -10,6 +10,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
@@ -89,7 +91,12 @@ public class P02_SpartanDeserilizationPOJO extends SpartanTestBase {
                 then()
                 .statusCode(200).extract().response();
 
-        System.out.println(" ----- JSON - GET FIRST SPARTAN-----");
+        System.out.println(" ----- RESPONSE -----");
+        Search search1 = response.as(Search.class);
+
+        // since we are not providing path for response still we can use response.as() to make deserialization
+
+        System.out.println(" ----- JSON -----");
         JsonPath jp = response.jsonPath();
 
         Search search = jp.getObject("", Search.class);
@@ -97,5 +104,27 @@ public class P02_SpartanDeserilizationPOJO extends SpartanTestBase {
         System.out.println(search.getTotalElement());
         System.out.println("search.getContent().get(0) = " + search.getContent().get(0));
         System.out.println("search.getContent().get(0).getName() = " + search.getContent().get(0).getName());
+        System.out.println("search.getContent().get(0).getId() = " + search.getContent().get(0).getId());
+
+    }
+
+    @DisplayName("GET Spartans from search endpoint for deserialization to List Of Spartan Class ")
+    @Test
+    public void test4() {
+
+        Response response = given().accept(ContentType.JSON).
+                when().get("/api/spartans/search").
+                then()
+                .statusCode(200).extract().response();
+
+        JsonPath jsonPath = response.jsonPath();
+
+       List<Spartan> allSpartans= jsonPath.getList("content",Spartan.class);
+        for (Spartan eachSpartan : allSpartans) {
+            System.out.println("eachSpartan = " + eachSpartan);
+        }
+
+        System.out.println("allSpartans.get(0) = " + allSpartans.get(0));
+        System.out.println("allSpartans.get(0).getId() = " + allSpartans.get(0).getId());
     }
 }
